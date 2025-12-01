@@ -79,8 +79,16 @@ export function ToolInvocationBadge({ toolInvocation }: ToolInvocationBadgeProps
   const { icon, message } = getToolMessage(toolInvocation.toolName, toolInvocation.args);
   const isCompleted = toolInvocation.state === "result" && toolInvocation.result;
 
+  // Create tooltip text showing full path
+  const tooltipText = toolInvocation.args?.path
+    ? `Full path: ${toolInvocation.args.path}`
+    : message;
+
   return (
-    <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-neutral-50 rounded-lg text-xs border border-neutral-200">
+    <div
+      className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-neutral-50 rounded-lg text-xs border border-neutral-200"
+      title={tooltipText}
+    >
       {isCompleted ? (
         <>
           <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
